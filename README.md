@@ -1,4 +1,4 @@
-# Tech task requested by Solvo Global for the Front End Developer position
+# Tech task requested for the Front End Developer position
 
 ## Requested on 07/25/2022
 
