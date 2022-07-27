@@ -2,31 +2,25 @@ import { useContext } from "react";
 
 import {
   Box,
-  Input,
-  InputLeftAddon,
-  InputGroup,
   ButtonGroup,
   Button,
   Heading,
   IconButton,
 } from "@chakra-ui/react";
 
-import { CloseIcon, SearchIcon } from "@chakra-ui/icons";
+import { CloseIcon } from "@chakra-ui/icons";
 
 import { useNavigate } from "react-router-dom";
 
-import { AuthContext } from "../../context";
+import { AuthContext } from "../../context/auth";
 
 export const Topbar = () => {
-  const { user } = useContext(AuthContext);
-
-  console.log({ user });
+  const { user, logout } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    
-
+    logout();
 
     navigate("/login", {
       replace: true,
@@ -45,22 +39,7 @@ export const Topbar = () => {
       shadow="sm"
     >
       <Heading>Weather</Heading>
-      {2 === 1 && (
-        <InputGroup size="md" w="17.5rem">
-          <InputLeftAddon
-            bgColor="gray.200"
-            border="none"
-            shadow="xs"
-            children={<SearchIcon />}
-          />
-          <Input
-            variant="filled"
-            shadow="xs"
-            bgColor="gray.300"
-            placeholder="Search by city or ZIP code..."
-          />
-        </InputGroup>
-      )}
+      
       <ButtonGroup gap={6} alignItems="center">
         <Button bgColor="gray.300" onClick={() => navigate("/login")}>
           Sign In
@@ -69,7 +48,7 @@ export const Topbar = () => {
           <IconButton
             aria-label="Sign out"
             colorScheme="red"
-            icon={<CloseIcon />}
+            icon={<CloseIcon onClick={handleLogout} />}
           />
         )}
       </ButtonGroup>

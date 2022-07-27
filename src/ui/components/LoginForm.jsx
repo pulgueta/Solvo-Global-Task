@@ -15,7 +15,7 @@ import { EmailIcon, LockIcon } from "@chakra-ui/icons";
 
 import { useNavigate } from "react-router-dom";
 
-import { AuthContext } from "../../context";
+import { AuthContext } from "../../context/auth";
 
 export const LoginForm = () => {
   const [formData, setFormData] = useState({
