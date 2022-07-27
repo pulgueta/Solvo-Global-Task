@@ -4,7 +4,7 @@ import { LoginForm } from "../ui/components";
 export const Login = () => {
   return (
     <Box h="calc(100vh - 4rem)" bgColor="gray.50">
-      <Heading textAlign="center" py={{ base: "1rem", md: "1.5rem" }}>
+      <Heading textAlign="center" py={{ base: "1rem", md: "1.5rem" }} fontSize={{base: "1.6rem", md: "2rem"}}>
         Login with your credentials
       </Heading>
       <LoginForm />

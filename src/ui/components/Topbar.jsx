@@ -1,3 +1,5 @@
+import { useContext } from "react";
+
 import {
   Box,
   Input,
@@ -5,14 +7,31 @@ import {
   InputGroup,
   ButtonGroup,
   Button,
+  Heading,
+  IconButton,
 } from "@chakra-ui/react";
 
-import { SearchIcon } from "@chakra-ui/icons";
+import { CloseIcon, SearchIcon } from "@chakra-ui/icons";
 
 import { useNavigate } from "react-router-dom";
 
+import { AuthContext } from "../../context";
+
 export const Topbar = () => {
+  const { user } = useContext(AuthContext);
+
+  console.log({ user });
+
   const navigate = useNavigate();
+
+  const handleLogout = () => {
+    
+
+
+    navigate("/login", {
+      replace: true,
+    });
+  };
 
   return (
     <Box
@@ -20,30 +39,39 @@ export const Topbar = () => {
       h="4rem"
       px={{ base: 4, md: 12, lg: 20 }}
       display="flex"
-      justifyContent="flex-end"
+      justifyContent="space-between"
       alignItems="center"
       bgColor="gray.200"
-      shadow="xl"
+      shadow="sm"
     >
+      <Heading>Weather</Heading>
       {2 === 1 && (
-        <InputGroup size="md">
+        <InputGroup size="md" w="17.5rem">
           <InputLeftAddon
             bgColor="gray.200"
             border="none"
+            shadow="xs"
             children={<SearchIcon />}
           />
           <Input
             variant="filled"
+            shadow="xs"
             bgColor="gray.300"
-            placeholder="Search by city or ZIP..."
+            placeholder="Search by city or ZIP code..."
           />
         </InputGroup>
       )}
-      <ButtonGroup gap={6}>
-        <Button bgColor="gray.300" onClick={() => navigate("/")}>
+      <ButtonGroup gap={6} alignItems="center">
+        <Button bgColor="gray.300" onClick={() => navigate("/login")}>
           Sign In
         </Button>
-        {2 === 1 && <Button bgColor="gray.300">Sign Out</Button>}
+        {user?.logged === true && (
+          <IconButton
+            aria-label="Sign out"
+            colorScheme="red"
+            icon={<CloseIcon />}
+          />
+        )}
       </ButtonGroup>
     </Box>
   );

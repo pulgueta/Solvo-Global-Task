@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
 import { Topbar } from "./ui/components";
-import { Login } from "./views";
+import { Login, Weather } from "./views";
 
 export const App = () => {
   return (
@@ -9,7 +9,8 @@ export const App = () => {
       <Topbar />
 
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Weather />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </>
   );
