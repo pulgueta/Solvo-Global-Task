@@ -9,6 +9,7 @@ import {
   InputGroup,
   FormErrorMessage,
   Button,
+  useToast,
 } from "@chakra-ui/react";
 
 import { EmailIcon, LockIcon } from "@chakra-ui/icons";
@@ -29,6 +30,8 @@ export const LoginForm = () => {
 
   const { login } = useContext(AuthContext);
 
+  const toast = useToast();
+
   const handleLogin = () => {
     if (
       formData.email === import.meta.env.VITE_EMAIL &&
@@ -41,7 +44,14 @@ export const LoginForm = () => {
       setFormData({ email: "", password: "" });
     } else {
       setFormData({ email: "", password: "" });
-      console.log("error");
+      toast({
+        title: "Credentials are incorrect!",
+        description: "Try again...",
+        status: "error",
+        duration: 2500,
+        isClosable: true,
+        position: "top",
+      });
     }
   };
 

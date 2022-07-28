@@ -15,7 +15,7 @@ import { WeatherCard } from "../ui/components";
 
 export const Weather = () => {
   const [location, setLocation] = useState("");
-
+  const [weatherCard, setWeatherCard] = useState(false);
 
   return (
     <Box>
@@ -37,14 +37,21 @@ export const Weather = () => {
           bgColor="gray.300"
           placeholder="Search by city or ZIP code..."
           value={location}
-          onChange={(e) => setLocation(e.target.value)}
+          onChange={(e) => {
+            setLocation(e.target.value);
+            setWeatherCard(false);
+          }}
         />
 
-        <IconButton>
+        <IconButton
+          onClick={() => {
+            if (location) setWeatherCard(true);
+          }}
+        >
           <ArrowForwardIcon />
         </IconButton>
       </InputGroup>
-      {location === "" ? (
+      {!weatherCard ? (
         <Heading textAlign="center">Begin your search!</Heading>
       ) : (
         <WeatherCard query={location} />

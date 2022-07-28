@@ -39,17 +39,17 @@ export const Topbar = () => {
       shadow="sm"
     >
       <Heading>Weather</Heading>
-      
-      <ButtonGroup gap={6} alignItems="center">
-        <Button bgColor="gray.300" onClick={() => navigate("/login")}>
-          Sign In
-        </Button>
-        {user?.logged === true && (
-          <IconButton
-            aria-label="Sign out"
-            colorScheme="red"
-            icon={<CloseIcon onClick={handleLogout} />}
-          />
+
+      <ButtonGroup gap={3} alignItems="center">
+        {!user?.logged && !user && (
+          <Button bgColor="gray.300" onClick={() => navigate("/login")}>
+            Sign In
+          </Button>
+        )}
+        {(user?.logged || user) && (
+          <Button colorScheme="red" onClick={handleLogout}>
+            Sign Out
+          </Button>
         )}
       </ButtonGroup>
     </Box>

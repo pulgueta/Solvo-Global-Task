@@ -7,7 +7,7 @@ import { types } from "../../types";
 
 const trigger = () => {
   const user = JSON.parse(localStorage.getItem("user"));
-
+  
   return {
     logged: !!user,
     user,

@@ -31,13 +31,11 @@ export const WeatherCard = ({ query }) => {
     }
   };
 
-  const getData = async (e) => {
-    if (e.key === "Enter") {
-      await axios.get(URL).then((res) => {
-        console.log(res.data);
-        setInfo(res.data);
-      });
-    }
+  const getData = async () => {
+    await axios.get(URL).then((res) => {
+      console.log(res.data);
+      setInfo(res.data);
+    });
   };
 
   useEffect(() => {
@@ -45,14 +43,20 @@ export const WeatherCard = ({ query }) => {
   }, [trigger]);
 
   return (
-    <Box bgColor="gray.200" w={{ base: "20rem", md: "25rem", lg: "30rem" }} mx="auto" rounded="lg" p={{base: 4, md: 8}}>
+    <Box
+      bgColor="gray.200"
+      w={{ base: "20rem", md: "25rem", lg: "30rem" }}
+      mx="auto"
+      rounded="lg"
+      p={{ base: 4, md: 8 }}
+    >
       <Heading textAlign="center">
         {info.name}, {info.sys?.country}
       </Heading>
       <Text textAlign="center" fontSize="xl">
         Is currently at:
       </Text>
-      <Button w="100%" fontSize="2xl" onClick={handleUnit}>
+      <Button w="100%" fontSize="3xl" py={7} onClick={handleUnit}>
         {Math.round(info.main?.temp)} {trigger ? `°C` : `°F`}
       </Button>
       <UnorderedList my={4} fontWeight="500">
