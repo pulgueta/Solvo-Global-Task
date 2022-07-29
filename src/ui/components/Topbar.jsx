@@ -8,7 +8,7 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 
-import { CloseIcon } from "@chakra-ui/icons";
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 
 import { useNavigate } from "react-router-dom";
 
