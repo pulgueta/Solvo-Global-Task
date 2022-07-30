@@ -19,6 +19,7 @@ export const WeatherCard = ({ query }) => {
   const [info, setInfo] = useState({});
   const [trigger, setTrigger] = useState(false);
   const [unit, setUnit] = useState("imperial");
+  const [favorites, setFavorites] = useState([]);
 
   const toast = useToast();
 
@@ -43,15 +44,17 @@ export const WeatherCard = ({ query }) => {
     });
   };
 
-  const popToast = (name) => {
+  const setToFavorites = () => {
+    setFavorites([info.name]);
     toast({
       title: "Added to favorites",
-      description: `${name} was added to favorites`,
+      description: `${info.name} was added to favorites`,
       status: "success",
-      duration: 3000,
-      position: "top-right",
+      duration: 1500,
+      position: "top",
       isClosable: true,
     });
+    localStorage.setItem("favorites", JSON.stringify(favorites));
   };
 
   useEffect(() => {
@@ -63,7 +66,7 @@ export const WeatherCard = ({ query }) => {
       bgColor="gray.200"
       w={{ base: "20rem", md: "27.5rem", lg: "30rem" }}
       mx="auto"
-      rounded="lg"
+      rounded="xl"
       p={{ base: 4, md: 8 }}
     >
       {info.cod === 200 ? (
@@ -71,8 +74,16 @@ export const WeatherCard = ({ query }) => {
           <Heading textAlign="center">
             {info.name}, {info.sys?.country}
           </Heading>
-          <HStack justifyContent="center">
-            <Text textAlign="center" fontWeight="500">
+          <HStack
+            justifyContent="center"
+            bgColor="gray.300"
+            rounded="md"
+            my={2}
+            w="max-content"
+            px={8}
+            mx="auto"
+          >
+            <Text textAlign="center" fontWeight="500" fontSize="xl">
               {info.weather[0].main}
             </Text>
             <Image
@@ -118,16 +129,7 @@ export const WeatherCard = ({ query }) => {
             leftIcon={<StarIcon />}
             variant="solid"
             colorScheme="teal"
-            onClick={() =>
-              toast({
-                title: "Added to favorites",
-                description: `${info.name} was added to favorites`,
-                status: "success",
-                duration: 3000,
-                position: "top-right",
-                isClosable: true,
-              })
-            }
+            onClick={(item) => setToFavorites(item)}
           >
             Set to favorites
           </Button>

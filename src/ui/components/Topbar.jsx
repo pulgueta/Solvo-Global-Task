@@ -36,20 +36,18 @@ export const Topbar = () => {
       justifyContent="space-between"
       alignItems="center"
       bgColor="gray.200"
-      shadow="sm"
+      shadow="base"
     >
       <Heading>Weather</Heading>
 
-      <ButtonGroup gap={3} alignItems="center">
-        {!user?.logged && !user && (
-          <Button bgColor="gray.300" onClick={() => navigate("/login")}>
-            Sign In
-          </Button>
-        )}
+      <ButtonGroup gap={{base: 0, md: 4, lg: 8}} alignItems="center">
         {(user?.logged || user) && (
-          <Button colorScheme="red" onClick={handleLogout}>
-            Sign Out
-          </Button>
+          <>
+            <Button colorScheme="yellow" onClick={() => navigate("/favorites")}>Favorites</Button>
+            <Button colorScheme="red" onClick={handleLogout}>
+              Sign Out
+            </Button>
+          </>
         )}
       </ButtonGroup>
     </Box>

@@ -11,6 +11,8 @@ import {
 
 import { SearchIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 
+import { animate, motion } from "framer-motion";
+
 import { WeatherCard } from "../ui/components";
 
 export const Weather = () => {
@@ -20,6 +22,18 @@ export const Weather = () => {
   return (
     <Box>
       <InputGroup
+        as={motion.div}
+        initial={{
+          y: -25,
+          opacity: 0,
+        }}
+        animate={{
+          y: 0,
+          opacity: 1,
+          transition: {
+            duration: 1,
+          },
+        }}
         size="md"
         w={{ base: "21rem", md: "25rem", lg: "30rem" }}
         mx="auto"
@@ -52,7 +66,14 @@ export const Weather = () => {
         </IconButton>
       </InputGroup>
       {!weatherCard ? (
-        <Heading textAlign="center">Begin your search!</Heading>
+        <Heading
+          textAlign="center"
+          as={motion.h2}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: 1, delay: 0.5 } }}
+        >
+          Begin your search!
+        </Heading>
       ) : (
         <WeatherCard query={location} />
       )}

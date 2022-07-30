@@ -17,6 +17,7 @@ import { EmailIcon, LockIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
 
 import { AuthContext } from "../../context/auth";
+import { motion } from "framer-motion";
 
 export const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -57,6 +58,19 @@ export const LoginForm = () => {
 
   return (
     <Box
+      as={motion.div}
+      initial={{
+        x: -95,
+        opacity: 0,
+      }}
+      animate={{
+        x: 0,
+        opacity: 1,
+        transition: {
+          duration: 1,
+          delay: 0.25,
+        },
+      }}
       w={{ base: "20rem", md: "22.5rem", lg: "25rem" }}
       h={{ base: "20rem" }}
       mx="auto"

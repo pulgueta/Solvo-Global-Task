@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { PrivateRoute } from "./routes";
 
 import { Topbar } from "./ui/components";
-import { Login, Weather } from "./views";
+import { Login, Weather, Favorites } from "./views";
 
 export const App = () => {
   return (
@@ -11,6 +11,8 @@ export const App = () => {
       <Topbar />
 
       <Routes>
+        <Route path="/login" element={<Login />} />
+
         <Route
           path="/"
           element={
@@ -19,7 +21,14 @@ export const App = () => {
             </PrivateRoute>
           }
         />
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/favorites"
+          element={
+            <PrivateRoute>
+              <Favorites />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </>
   );
