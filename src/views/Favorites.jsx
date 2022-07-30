@@ -1,4 +1,4 @@
-import { Box, Heading, HStack, Stack, VStack } from "@chakra-ui/react";
+import { Box, Heading, HStack, Stack, Text, VStack } from "@chakra-ui/react";
 import { useEffect } from "react";
 
 export const Favorites = () => {
@@ -7,7 +7,13 @@ export const Favorites = () => {
   return (
     <VStack>
       <Heading>Favorites tab</Heading>
-      <Heading>{favorites}</Heading>
+      <Heading>{favorites.map(fav => {
+        return (
+          <>
+            <Text key={fav}>{fav}</Text>
+          </>
+        )
+      })}</Heading>
     </VStack>
   );
 };

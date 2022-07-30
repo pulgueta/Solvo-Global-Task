@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 
-export const WeatherCard = ({ query }) => {
+export const WeatherCard = ({ query, type }) => {
   const [info, setInfo] = useState({});
   const [trigger, setTrigger] = useState(false);
   const [unit, setUnit] = useState("imperial");
@@ -23,7 +23,9 @@ export const WeatherCard = ({ query }) => {
 
   const toast = useToast();
 
-  const URL = `https://api.openweathermap.org/data/2.5/weather?q=${query}&units=${unit}&appid=${
+  const URL = type ? `https://api.openweathermap.org/data/2.5/weather?q=${query}&units=${unit}&appid=${
+    import.meta.env.VITE_OPEN_WEATHER_API_KEY
+  }` : `https://api.openweathermap.org/data/2.5/weather?zip=${query}&units=${unit}&appid=${
     import.meta.env.VITE_OPEN_WEATHER_API_KEY
   }`;
 
@@ -45,7 +47,8 @@ export const WeatherCard = ({ query }) => {
   };
 
   const setToFavorites = () => {
-    setFavorites([info.name]);
+    setFavorites(info.name);
+    
     toast({
       title: "Added to favorites",
       description: `${info.name} was added to favorites`,
@@ -54,12 +57,13 @@ export const WeatherCard = ({ query }) => {
       position: "top",
       isClosable: true,
     });
-    localStorage.setItem("favorites", JSON.stringify(favorites));
+    localStorage.setItem("favorites", JSON.stringify([info.name, info.main.temp]));
   };
 
   useEffect(() => {
     getData();
-  }, [trigger]);
+    localStorage.setItem("favorites", JSON.stringify(favorites))
+  }, [trigger, favorites]);
 
   return (
     <Box

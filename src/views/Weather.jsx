@@ -1,7 +1,8 @@
 import { useState } from "react";
 
 import {
-  Box,
+  Button,
+  ButtonGroup,
   Heading,
   IconButton,
   Input,
@@ -11,29 +12,32 @@ import {
 
 import { SearchIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 
-import { animate, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 import { WeatherCard } from "../ui/components";
 
 export const Weather = () => {
   const [location, setLocation] = useState("");
   const [weatherCard, setWeatherCard] = useState(false);
+  const [query, setQuery] = useState(true);
 
   return (
-    <Box>
+    <>
+      <ButtonGroup pt={8} display="flex" justifyContent="center">
+        <Button onClick={() => setQuery(true)}>Search by city name</Button>
+        <Button
+          onClick={() => {
+            setQuery(false);
+            setLocation("");
+          }}
+        >
+          Search by ZIP code
+        </Button>
+      </ButtonGroup>
       <InputGroup
         as={motion.div}
-        initial={{
-          y: -25,
-          opacity: 0,
-        }}
-        animate={{
-          y: 0,
-          opacity: 1,
-          transition: {
-            duration: 1,
-          },
-        }}
+        initial={{ y: -25, opacity: 0 }}
+        animate={{ y: 0, opacity: 1, transition: { duration: 1 } }}
         size="md"
         w={{ base: "21rem", md: "25rem", lg: "30rem" }}
         mx="auto"
@@ -49,22 +53,22 @@ export const Weather = () => {
           variant="filled"
           shadow="xs"
           bgColor="gray.300"
-          placeholder="Search by city or ZIP code..."
+          placeholder={query ? "Search by city..." : "Search by ZIP code..."}
           value={location}
           onChange={(e) => {
             setLocation(e.target.value);
             setWeatherCard(false);
           }}
         />
-
         <IconButton
           onClick={() => {
-            if (location) setWeatherCard(true);
+            location && setWeatherCard(true);
           }}
         >
           <ArrowForwardIcon />
         </IconButton>
       </InputGroup>
+
       {!weatherCard ? (
         <Heading
           textAlign="center"
@@ -75,8 +79,8 @@ export const Weather = () => {
           Begin your search!
         </Heading>
       ) : (
-        <WeatherCard query={location} />
+        <WeatherCard query={location} type={query} />
       )}
-    </Box>
+    </>
   );
 };
