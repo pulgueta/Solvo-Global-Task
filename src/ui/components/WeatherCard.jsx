@@ -41,7 +41,6 @@ export const WeatherCard = ({ query, type }) => {
 
   const getData = async () => {
     await axios.get(URL).then((res) => {
-      console.log(res.data);
       setInfo(res.data);
     });
   };
