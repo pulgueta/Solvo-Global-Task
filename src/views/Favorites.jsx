@@ -1,5 +1,4 @@
-import { Box, Heading, HStack, Stack, Text, VStack } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { Box, Heading, HStack, Text, VStack } from "@chakra-ui/react";
 
 export const Favorites = () => {
   const favorites = JSON.parse(localStorage.getItem("favorites"));
@@ -7,13 +6,18 @@ export const Favorites = () => {
   return (
     <VStack>
       <Heading>Favorites tab</Heading>
-      <Heading>{favorites.map(fav => {
-        return (
-          <>
-            <Text key={fav}>{fav}</Text>
-          </>
-        )
-      })}</Heading>
+      <Box
+        bgColor="gray.200"
+        w={{ base: "20rem", md: "27.5rem", lg: "30rem" }}
+        mx="auto"
+        rounded="xl"
+        p={{ base: 4, md: 8 }}
+      >
+        <HStack justifyContent="space-around" alignItems="center">
+          <Heading>{favorites.name}</Heading>
+          <Text fontSize="xl">{favorites.weather[0].main}</Text>
+        </HStack>
+      </Box>
     </VStack>
   );
 };

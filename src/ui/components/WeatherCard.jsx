@@ -57,7 +57,7 @@ export const WeatherCard = ({ query, type }) => {
       position: "top",
       isClosable: true,
     });
-    localStorage.setItem("favorites", JSON.stringify([info.name, info.main.temp]));
+    localStorage.setItem("favorites", JSON.stringify(info));
   };
 
   useEffect(() => {
