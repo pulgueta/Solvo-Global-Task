@@ -46,7 +46,7 @@ export const WeatherCard = ({ query, type }) => {
   };
 
   const setToFavorites = () => {
-    setFavorites(info.name);
+    setFavorites(info);
     
     toast({
       title: "Added to favorites",
@@ -56,6 +56,7 @@ export const WeatherCard = ({ query, type }) => {
       position: "top",
       isClosable: true,
     });
+    console.log(info);
     localStorage.setItem("favorites", JSON.stringify(info));
   };
 

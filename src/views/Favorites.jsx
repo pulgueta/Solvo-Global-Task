@@ -14,8 +14,8 @@ export const Favorites = () => {
         p={{ base: 4, md: 8 }}
       >
         <HStack justifyContent="space-around" alignItems="center">
-          <Heading>{favorites.name}</Heading>
-          <Text fontSize="xl">{favorites.weather[0].main}</Text>
+          <Heading>{favorites?.name}</Heading>
+          <Text fontSize="xl">{favorites?.weather[0].main}</Text>
         </HStack>
       </Box>
     </VStack>
